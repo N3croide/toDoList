@@ -40,7 +40,7 @@ export class tareasAgg extends HTMLElement{
                   </div>
                   <div style="display: none;">
                     <label for="estado" class="form-label"></label>
-                    <input type="text" class="form-control" id="estado" value='Incompleto' name="estado">
+                    <input type="text" class="form-control" id="estado" value='incompleto' name="estado">
                   </div>
                   <div class="col-md-3">
                     <label for="inputState" class="form-label"><b>Prioridad</b></label>

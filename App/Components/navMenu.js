@@ -14,16 +14,16 @@ export class navMenu extends HTMLElement{
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" data-verOcultar= '["#regTask",["#completedTasks","#incompeletedTasks","#deletedTasks"]]' data-section = '["rt"]'data-bs-toggle="modal" data-bs-target="#regTask" href="#">Registrar Tarea</a>
+                            <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#regTask" href="#">Registrar Tarea</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menuSelector" data-verOcultar= '["#completedTasks",["#regTask","#incompeletedTasks","#deletedTasks"]]' data-section = '["ct"]' href="#">Tareas Completas</a>
+                            <a class="nav-link menuSelector" data-verOcultar= '["#completedTasks",["#incompeletedTasks","#deletedTasks"]]' href="#">Tareas Completas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menuSelector" data-verOcultar= '["#incompeletedTasks",["#regTask","#completedTasks","#deletedTasks"]]' data-section = '["it"]' href="#">Tareas Pendientes</a>
+                            <a class="nav-link menuSelector" data-verOcultar= '["#incompeletedTasks",["#completedTasks","#deletedTasks"]]' href="#">Tareas Pendientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menuSelector" data-verOcultar= '["#deletedTasks",["#regTask","#incompeletedTasks","#completedTasks"]]' data-section = '["dt"]' href="#">Tareas Borradas</a>
+                            <a class="nav-link menuSelector" data-verOcultar= '["#deletedTasks",["#incompeletedTasks","#completedTasks"]]' href="#">Tareas Borradas</a>
                         </li>
                         </ul>
                     </div>
@@ -32,23 +32,11 @@ export class navMenu extends HTMLElement{
         `;
         this.querySelectorAll(".menuSelector").forEach((val,id) => {
             val.addEventListener("click", (e) => {
-                let mainContainer = document.querySelector('#containerTarjetas');
-                mainContainer.innerHTML = "";
-                let data = JSON.parse(e.target.dataset.section);
-                switch (data[0]) {
-                    case 'ct':
-                        mainContainer.innerHTML = `<div class="conatiner row" id="completedTasks"></div>`            
-                        break;
-                
-                    case 'it':
-                        mainContainer.innerHTML = `<div class="conatiner row" id="incompeletedTasks"></div>`            
-                        break;
-                
-                    case 'dt':
-                        mainContainer.innerHTML = `<div class="conatiner row" id="deletedTasks"></div>`            
-                        break;
-                }
-
+                let ver = JSON.parse(e.currentTarget.getAttribute('data-verOcultar'));
+                document.querySelector(ver[0]).style.display = "flex";
+                ver[1].forEach((element)=>{
+                    document.querySelector(element).style.display = "none";
+                })
             });
         });   
     }
